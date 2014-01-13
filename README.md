@@ -2,3 +2,5 @@ ng-contenteditable
 ==================
 
 ng-contenteditable
+
+:-)
