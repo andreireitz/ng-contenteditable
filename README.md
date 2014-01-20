@@ -10,6 +10,7 @@ An easy to use, somewhat experimental, directive to enable rich text editing for
 The available demo is requires jQuery and Bootstrap 3 (because I just wanted to put something together quick).
 
 [Documentation](https://github.com/cathalsurfs/ng-contenteditable/wiki) (TODO)
+[Reference](https://github.com/cathalsurfs/ng-contenteditable/blob/master/demo/js/app.js) (see comments)
 
 ##Requirements##
 
@@ -60,7 +61,7 @@ Takes the following options object as only argument:
 
 Other services which are available, but primarily for internal use (required) are:
 
-editable.utilityService (required by all)
-editable.configService (required by editable directive)
-editable.rangeHelperService (required by editable directive)
-editable.commandHelperService (required by editable-control directive)
+__editable.utilityService__ (required by all)
+__editable.configService__ (required by editable directive)
+__editable.rangeHelperService__ (required by editable directive)
+__editable.commandHelperService__ (required by editable-control directive)
