@@ -1,7 +1,7 @@
 ![ngContentEditable](http://inchsurf.com/ng-contenteditable/ng-contenteditable.png)
 
-=================
-ngContentEditable
+===================
+#ngContentEditable#
 
 ##Native contenteditable directive for AngularJS##
 
