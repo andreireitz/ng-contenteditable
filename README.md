@@ -1,13 +1,13 @@
-ng-contenteditable
-==================
+ngContentEditable
+=================
 
-#Native contenteditable directive for AngularJS#
+![ngContentEditable](http://inchsurf.com/ng-contenteditable/ng-contenteditable.png) #Native contenteditable directive for AngularJS#
 
-An easy to use, somewhat experimental, directive to enable rich text editing for users, within the browser window. This directive has no dependency other frameworks. It does require a browser that supports both HTML5 contenteditable and HTML5 drag/drop events.
+An easy to use, somewhat experimental, directive to enable rich text editing for users, within the browser window. This directive has no dependency on other frameworks. It does require a browser that supports both HTML5 contenteditable and HTML5 drag/drop events.
 
 [Live Demo](http://inchsurf.com/ng-contenteditable/)
 
-The available demo is requires jQuery and Bootstrap 3 (because I just wanted to put something together quick).
+The available demo does require jQuery and Bootstrap 3 (because I just wanted to put something together quick).
 
 [Documentation](https://github.com/cathalsurfs/ng-contenteditable/wiki) (TODO)
 
@@ -15,13 +15,11 @@ The available demo is requires jQuery and Bootstrap 3 (because I just wanted to 
 
 ##Requirements##
 
-####Firefox####
+###Firefox###
 
-Due to the experimental nature, it is strongly advised to use the __Foxy__ browser:
+Due to the experimental nature of this extension, it is __strongly__ advised to use the [Foxy](https://getfirefox.com) browser!
 
-[Firefox](https://getfirefox.com)
-
-Results with other browsers may vary, due to incomplete range selection support for browsers than don't do things in a sensible manner (Chrome, quite often). If you want to lose your sanity, go ahead and implement support for IE - although things should be good in IE 10 (not tested).
+Results with other browsers may vary, due to funky implementations for range selection in browsers than don't do things in sensibly or as expected (Chrome, quite often). If you want to lose your sanity, go ahead and implement support for IE - although things should be good to go in IE 10 (not tested).
 
 #Directives#
 
@@ -33,7 +31,7 @@ Example:
 
 	<div class="editable" data-ng-model="your.data.model">Some default static content...</div>
 
-If your model data is not available, ngContentEditable will default to whatever static content you have contained within your element.
+If your model data is not available, ngContentEditable will default to whatever static content you have contained within your element. This is handy, when for example you are mocking up a web page, or you want to publish with existing content the user can later modify.
 
 ##editable-control##
 
@@ -63,6 +61,9 @@ Takes the following options object as only argument:
 Other services which are available, but primarily for internal use (required) are:
 
 __editable.utilityService__ (required by all)
+
 __editable.configService__ (required by editable directive)
+
 __editable.rangeHelperService__ (required by editable directive)
+
 __editable.commandHelperService__ (required by editable-control directive)
