@@ -12,6 +12,7 @@ var ngContentEditable = angular.module('ngContentEditable', []);
 ngContentEditable.directive('editable', ['$compile', 'editable.dragHelperService', 'editable.rangeHelperService', 'editable.utilityService', 'editable.commandHelperService', 'editable.configService', function ($compile, drag, range, utils, commands, config) {
     
     return {
+        scope: true, // Create a new scope for each instance.
         restrict: 'C', // Only initialize on class names.
         require: '?ngModel',
         controller: function($scope, $element) {
@@ -19,7 +20,7 @@ ngContentEditable.directive('editable', ['$compile', 'editable.dragHelperService
         },
         link: function (scope, element, attrs, ngModel) {
 
-            if (!ngModel) return; // Do not initialize if data model not specified.
+            if (!ngModel) return; // Do not initialize if data model not provided.
 
             element.attr('contenteditable', 'true');
 
