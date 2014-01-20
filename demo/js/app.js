@@ -23,7 +23,10 @@ EditorApp.directive('editable', function () { // Add additional behavior to show
      * editable regions, when the user interacts, to determine when to show or hide 
      * our custom toolbar for this demo application.
      *
-     */ 
+     */
+
+    var _showFirstTimeHint = true,
+        $toolbar = $('#editable-toolbar');
 
     return {
         restrict: 'C',
@@ -34,12 +37,27 @@ EditorApp.directive('editable', function () { // Add additional behavior to show
             element.bind('focus mousedown keypress', function (event) {
                 _hasFocus = true;
                 _mouseLeave = false;
-                $('#editable-toolbar').removeClass("hide").fadeIn();
+                $toolbar.removeClass("hide").fadeIn();
+
+                if (_showFirstTimeHint) { // Draw attention to toolbar on first interaction with editable region.
+                    _showFirstTimeHint = false;
+                    $toolbar.popover({
+                        animation: true,
+                        placement: 'bottom',
+                        title: '<i class="fa fa-info"></i> &nbsp; <b>Custom toolbar</b>',
+                        content: '<p><b>Hey!</b> Use me to update your text selections.</p><p>This is an example of a custom toolbar interface, making use of editable-command directive for command buttons (above).</p>',
+                        html: true,
+                        trigger: 'manual',
+                        container: 'body' // This is important or else we pollute the editable region content!
+                    }).popover('show');
+                    setTimeout(function () { $toolbar.popover('destroy'); }, 5000);
+                }
+
             });
             element.bind('blur', function (event) {
                 _hasFocus = true;
                 _mouseLeave = false;
-                $('#editable-toolbar').fadeOut();
+                $toolbar.fadeOut();
             });
         }
     };
@@ -76,6 +94,19 @@ EditorApp.directive('editableControl', function () { // Add additional behavior 
                         placement: 'bottom',
                         title: '<i class="fa fa-font"></i> &nbsp; <b>Change font size</b>',
                         content: 'Add controls...',
+                        html: true,
+                        container: 'body' // This is important or else we pollute the editable region content!
+                    }).popover('show');
+
+                }
+
+                if (element.attr('ng-click') === 'saveAll()') {
+
+                    $(element).popover({ // Do custom popup behavior...
+                        animation: true,
+                        placement: 'bottom',
+                        title: '<i class="fa fa-floppy-o"></i> &nbsp; <b>Saved</b>',
+                        content: 'Refresh the page to validate your saved changes...',
                         html: true,
                         container: 'body' // This is important or else we pollute the editable region content!
                     }).popover('show');
