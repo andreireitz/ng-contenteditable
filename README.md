@@ -21,7 +21,7 @@ The available demo requires jQuery and Bootstrap 3 (because I just wanted to put
 
 Due to the experimental nature of this extension, it is __strongly__ advised to use the [Foxy](https://getfirefox.com) browser!
 
-Results with other browsers may vary, due to funky implementations for range selection in browsers than don't do things sensibly or as expected (Chrome, quite often). If you want to lose your sanity, go ahead and implement support for IE - although things should be good to go in IE 10 (not tested).
+Results with other browsers may vary, due to funky implementations for range selection in browsers than don't do things sensibly or as expected (Chrome, quite often). If you want to lose your sanity, go ahead and implement support for IE - although things should be good to go in IE 10 (not tested). Wider support is planned.
 
 #Directives#
 
@@ -69,3 +69,9 @@ __editable.configService__ (required by editable directive)
 __editable.rangeHelperService__ (required by editable directive)
 
 __editable.commandHelperService__ (required by editable-control directive)
+
+##Tests##
+
+Sorry, tests are a bit sparse at the moment. For now, I've made available some basic sanity testing and testing around validation of two-way data binding on editable regions. Also, a little bit of range / selection interaction with editable regions, for good measure (for now).
+
+I've got to figure out if implementing more robust cross-browser support is more worthwhile than launching into the complicated simulation of user interactions for HTML5 drag and drop, range selection etc.
