@@ -13,7 +13,7 @@ The available demo is requires jQuery and Bootstrap 3 (because I just wanted to 
 
 ##Requirements##
 
-#####Firefox#####
+####Firefox####
 
 Due to the experimental nature, it is strongly advised to use the __Foxy__ browser:
 
@@ -45,7 +45,7 @@ Main thing here is the following method:
 
 ###registerDropHandler(options)###
 
-Method provides mechanism to register (withing your own directives) drop handler for editable elements.
+Method provides mechanism to register (from within your own associated directives) a drop handler for editable elements.
 
 Takes the following options object as only argument:
 
