@@ -146,8 +146,10 @@ EditorApp.directive('img', ['editable.dragHelperService', function (drag) {
             });
             
             element.bind('mousedown mouseleave dragstart', function (event) {
-                element.attr("contenteditable", true); // Enables image resizing in Mozilla.
-                if (scope.$isNgContentEditable) $(element).popover('hide').popover('destroy');
+                if (scope.$isNgContentEditable) {
+                    element.attr("contenteditable", true); // Enables image resizing in Mozilla.
+                    $(element).popover('hide').popover('destroy');
+                }
             });
         }
     };
