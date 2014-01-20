@@ -2,7 +2,6 @@
 
 =================
 ngContentEditable
-=================
 
 ##Native contenteditable directive for AngularJS##
 
