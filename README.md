@@ -13,7 +13,7 @@ The available demo is requires jQuery and Bootstrap 3 (because I just wanted to 
 
 ##Requirements##
 
-Due to the experimental nature, it is strongly advised to use the ###Foxy### browser:
+Due to the experimental nature, it is strongly advised to use the __Foxy__ browser:
 
 [Firefox](https://getfirefox.com)
 
