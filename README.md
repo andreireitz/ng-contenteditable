@@ -13,6 +13,8 @@ The available demo is requires jQuery and Bootstrap 3 (because I just wanted to 
 
 ##Requirements##
 
+#####Firefox#####
+
 Due to the experimental nature, it is strongly advised to use the __Foxy__ browser:
 
 [Firefox](https://getfirefox.com)
@@ -27,7 +29,7 @@ Directive declaration style is by class, by adding the "editable" class name to 
 
 Example:
 
-<div class="editable" data-ng-model="your.data.model">Some default static content...</div>
+	<div class="editable" data-ng-model="your.data.model">Some default static content...</div>
 
 If your model data is not available, ngContentEditable will default to whatever static content you have contained within your element.
 
