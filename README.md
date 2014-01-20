@@ -1,9 +1,9 @@
-![ngContentEditable](http://inchsurf.com/ng-contenteditable/ng-contenteditable.png)
+![ngContentEditable](http://inchsurf.com/ng-contenteditable/ng-contenteditable-logo.png)
 
-===================
-#ngContentEditable#
+=====================
+##ngContentEditable##
 
-##Native contenteditable directive for AngularJS##
+###Native contenteditable directive for AngularJS###
 
 An easy to use, somewhat experimental, directive to enable rich text editing for users, within the browser window. This directive has no dependency on other frameworks. It does require a browser that supports both HTML5 contenteditable and HTML5 drag/drop events.
 
