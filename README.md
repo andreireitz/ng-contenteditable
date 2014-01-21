@@ -74,4 +74,6 @@ __editable.commandHelperService__ (required by editable-control directive)
 
 Sorry, tests are a bit sparse at the moment. For now, I've made available some basic sanity testing and testing around validation of two-way data binding on editable regions. Also, a little bit of range / selection interaction with editable regions, for good measure (for now).
 
-I've got to figure out if implementing more robust cross-browser support is more worthwhile than launching into the complicated simulation of user interactions for HTML5 drag and drop, range selection etc.
+[Tests](https://github.com/cathalsurfs/ng-contenteditable/tree/master/test)
+
+I will decide if implementing more robust cross-browser support is of greater initial value, than launching into simulation of user interactions for HTML5 drag and drop, range selection etc.
