@@ -44,9 +44,9 @@ ngContentEditable.directive('editable', ['$compile', 'editable.dragHelperService
                 else updateFn();
             };
 
-            var _insertNode = function (data, event) {
+            var _insertNode = function (data, event, compile) {
                 range.captureRange(event);
-                var node = $compile(data)(scope);
+                var node = (compile === false) ? angular.element(data) : $compile(data)(scope);
                 node.addClass(config.DRAG_MOVE_CLASS);
                 range.insertNode(node);
                 return node;
@@ -85,13 +85,13 @@ ngContentEditable.directive('editable', ['$compile', 'editable.dragHelperService
                     var file = filesData[0], // TODO: Implement queue system to handle list of files.
                         handler = drag.getDropHandlerObject(file.type);
                     if (!handler) return callback({ error: config.ERRORS.HANDLER_NOT_DEFINED, data: file.type, types: types });
-                    var node = _insertNode(handler.node, event); // Insert node prior to data upload.
+                    var node = _insertNode(handler.node, event, false); // Insert node prior to data upload.
                     _updateScope();
                     if (handler) {
                         drag.processFile(file).then(function (data) {
                             drag.triggerFormatHandler(handler, data); // NOTE: Invoke custom handler (usually defined in your custom directive definition body).
                             if (typeof (callback) === 'function') callback({ error: false, data: filesData, types: types });
-                            //_updateScope({ wait: true }); // Wait a bit in case scope is already updating.
+                            $compile(node)(scope);
                         });
                     }
                     return false; // Prevent default browser behavior for files.
@@ -190,13 +190,9 @@ ngContentEditable.directive('editable', ['$compile', 'editable.dragHelperService
 ngContentEditable.directive('editableComponent', ['editable.dragHelperService', 'editable.rangeHelperService', 'editable.configService', function (drag, range, config) {
     return {
         restrict: 'C',
-        scope: true,
         link: function (scope, element, attrs) {
             ((element)
                 .attr('contenteditable', false)
-                .bind('mouseover', function () {
-                    if (scope.$isNgContentEditable) console.log('EDITABLE', element)
-                })
                 .bind('dragstart', function (event) {
                     if (scope.$isNgContentEditable) {
                         drag.setDragElement(element);
