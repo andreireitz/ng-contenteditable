@@ -12,7 +12,7 @@ var ngContentEditable = angular.module('ngContentEditable', []);
 ngContentEditable.directive('editable', ['$compile', 'editable.dragHelperService', 'editable.rangeHelperService', 'editable.utilityService', 'editable.commandHelperService', 'editable.configService', function ($compile, drag, range, utils, commands, config) {
     
     return {
-        scope: true, // Create a new scope for each instance.
+        scope: true, // Create new scope for each instance.
         restrict: 'C', // Only initialize on class names.
         require: '?ngModel',
         controller: function($scope, $element) {
