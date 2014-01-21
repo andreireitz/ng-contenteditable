@@ -5,7 +5,7 @@
 
 ###Native contenteditable directive for AngularJS###
 
-An easy to use, somewhat experimental, directive to enable rich text editing for users, within the browser window. This directive has no dependency on other frameworks. It does require a browser that supports both HTML5 contenteditable and HTML5 drag/drop events.
+An easy to use, somewhat experimental, directive to enable rich text editing for users, within the browser window. This directive has no hard-linked dependency on other frameworks (refer to section on "editable-component" directive below). It does require a browser that supports both HTML5 contenteditable and HTML5 drag/drop events.
 
 [Live Demo](http://inchsurf.com/ng-contenteditable/)
 
@@ -41,13 +41,15 @@ If your model data is not available, ngContentEditable will default to whatever 
 
 Any directives which are placed within an editable region (either implicitly or by user drag drop interaction), will be compiled dynamically. These directives will have access to the following property (as long as they are not defined with isolate scope):
 
-__$isNgContentEditable__ (boolean)
+__$isNgContentEditable__ (Boolean)
 
 You can access this property to determine if your directive is effectively in "editable mode". In this case, you can define logic for specific behaviors.
 
 ##editabel-component##
 
 Directive declaration style is by class, by adding the "editable-component" class name to any elements / directives for which you want to __preserve__ scope. Note - preservation of scope is not entirely reliable. For example, where the user selects and moves a range which encompasses the target element / directive.
+
+* This directive introduces a requirement for jQuery to provide advanced DOM manipulation.
 
 ##editable-control##
 
@@ -63,13 +65,13 @@ Main thing here is the following method:
 
 Method provides mechanism to register (from within your own associated directives) a drop handler for editable elements.
 
-Takes the following options object as only argument:
+Takes the following options object as its only argument:
 
 	{
-		tag: string, 			// Name of tag (e.g. 'img')
+		tag: String, 			// Name of tag (e.g. 'img')
 		types: [], 				// Array of strings, for each mime type you want to accept (e.g. ['image/jpeg', 'image/png', 'image/gif'])
 		node: angular.element 	// Wrapped element which is inserted into editable region (DOM) during uploading phase, if any are associated with this type, for positive user feedback.
-		format: function 		// Callback function which passes single argument (data) to allow manipulation of inserted element on uploading phase completion (e.g. uploaded image final display).
+		format: Function 		// Callback function which passes single argument (data) to allow manipulation of inserted element on uploading phase completion (e.g. uploaded image final display).
 	}
 
 ##Other##
