@@ -37,6 +37,15 @@ Example:
 
 If your model data is not available, ngContentEditable will default to whatever static content you have contained within your element. This is handy, when for example you are mocking up a web page, or you want to publish with initial static content the user can later modify. Subsequent changes can update to your model.
 
+####Scope####
+
+Any directives which are placed within an editable region (either implicitly or by user drag drop interaction), will be compiled dynamically. These directives will have access to the following property (as long as they are not defined with isolate scope):
+
+__$isNgContentEditable__ (boolean)
+
+You can access this property to determine if your directive is effectively in "editable mode". This way, you can define logic for specific behaviors, in this case.
+
+
 ##editable-control##
 
 Directive declaration style is by class, by adding the "editable-control" class name to any elements you wish to function as a command / button within your web page or application.
