@@ -46,8 +46,16 @@
     user-select: none;
     -khtml-user-drag: element;
     -webkit-user-drag: element;
-    -moz-user-focus: ignore !important;
+    -moz-user-focus: ignore;
     cursor: pointer !important;
+}
+
+.editable-allow-select {
+   -moz-user-select: all !important;
+    -khtml-user-select: all !important;
+    -webkit-user-select: all !important;
+    user-select: all !important; 
+    cursor: default !important;
 }
 
 .editable-button[data-active=true] {
