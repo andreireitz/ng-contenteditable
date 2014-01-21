@@ -5,7 +5,7 @@
 
 ###Native contenteditable directive for AngularJS###
 
-An easy to use, somewhat experimental, directive to enable rich text editing for users, within the browser window. This directive has no hard-linked dependency on other frameworks (refer to section on "editable-component" directive below). It does require a browser that supports both HTML5 contenteditable and HTML5 drag/drop events.
+An easy to use, somewhat experimental, directive to enable rich text editing for users, within the browser window. This directive has no dependency on other frameworks. It does require a browser that supports both HTML5 contenteditable and HTML5 drag/drop events.
 
 [Live Demo](http://inchsurf.com/ng-contenteditable/)
 
@@ -47,9 +47,7 @@ You can access this property to determine if your directive is effectively in "e
 
 ##editabel-component##
 
-Directive declaration style is by class, by adding the "editable-component" class name to any elements / directives for which you want to __preserve__ scope. Note - preservation of scope is not entirely reliable. For example, where the user selects and moves a range which encompasses the target element / directive.
-
-* This directive introduces a requirement for jQuery to provide advanced DOM manipulation.
+Directive declaration style is by class, by adding the "editable-component" class name to any elements / directives for which you want to __preserve__ scope. Note - preservation of scope may not be completely reliable. For example, where the user selects a range which encompasses any editable-component directives, any subsequent drag event is cancelled for safety.
 
 ##editable-control##
 
