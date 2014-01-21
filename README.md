@@ -21,7 +21,7 @@ The available demo requires jQuery and Bootstrap 3 (because I just wanted to put
 
 ###Firefox###
 
-Due to the experimental nature of this extension, it is __strongly__ advised to use the [Foxy](https://getfirefox.com) browser!
+Due to the experimental nature of this extension, it is __strongly__ advised to use the [Foxy](https://getfirefox.com) browser, at this time.
 
 Results with other browsers may vary, due to funky implementations for range selection in browsers than don't do things sensibly or as expected (Chrome, quite often). If you want to lose your sanity, go ahead and implement support for IE - although things should be good to go in IE 10 (not tested). Wider support is planned.
 
@@ -43,7 +43,7 @@ Any directives which are placed within an editable region (either implicitly or 
 
 __$isNgContentEditable__ (boolean)
 
-You can access this property to determine if your directive is effectively in "editable mode". This way, you can define logic for specific behaviors, in this case.
+You can access this property to determine if your directive is effectively in "editable mode". In this case, you can define logic for specific behaviors.
 
 
 ##editable-control##
