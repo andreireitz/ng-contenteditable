@@ -140,6 +140,10 @@ ngContentEditable.directive('editable', ['$compile', 'editable.dragHelperService
                     //utils.setElementResizeEnabled(element, false);
                 }) 
                 .bind('dragstart', function (event) {
+                    if (range.getEditableComponents()) { // Prevent user from dragging range containing editable-component directives!
+                        event.preventDefault();
+                        return false;
+                    }
                     _dragging = true;
                     //_cachedComputedStyle = utils.cacheElementStyle(element, ['height', 'width'], true);
                 })
@@ -147,19 +151,18 @@ ngContentEditable.directive('editable', ['$compile', 'editable.dragHelperService
                     //utils.restoreElementStyle(element, _cachedComputedStyle);
                 })
                 .bind('drop', function (event) {
-                    
                     event.preventDefault();
 
-                    component = drag.getDragElement();
+                    var component = drag.getDragElement();
 
                     if (component) {
                         event.preventDefault();
-                        var $component = $(component);
-                        var r = range.captureRange(event);
-                        $component.detach();
-                        var n = document.createElement('span');
-                        range.insertNode(n);
-                        $(n).replaceWith($component);
+                        var el = component[0],
+                            r = range.captureRange(event),
+                            placeholder = document.createElement('span');
+                        el.parentNode.removeChild(el);
+                        range.insertNode(placeholder);
+                        placeholder.appendChild(el);
                         _updateScope();
                         return false;
                     }
@@ -168,7 +171,6 @@ ngContentEditable.directive('editable', ['$compile', 'editable.dragHelperService
                         utils.triggerErrorHandler(data, scope);
                         return false;
                     });
-
                 })
                 .bind('paste', function (event) {
                     return _processData(event, function (data) { // Callback after drag data is processed (e.g. file upload).
@@ -184,7 +186,7 @@ ngContentEditable.directive('editable', ['$compile', 'editable.dragHelperService
 
 }]);
 
-ngContentEditable.directive('editableComponent', ['editable.dragHelperService', 'editable.configService', function (drag, config) {
+ngContentEditable.directive('editableComponent', ['editable.dragHelperService', 'editable.rangeHelperService', 'editable.configService', function (drag, range, config) {
     return {
         restrict: 'C',
         scope: true,
@@ -315,7 +317,7 @@ ngContentEditable.factory('editable.dragHelperService', ['$q', 'editable.utility
 
 }]);
 
-ngContentEditable.factory('editable.rangeHelperService', [function () {
+ngContentEditable.factory('editable.rangeHelperService', ['editable.configService', function (config) {
 
     var _range = null;
 
@@ -364,9 +366,7 @@ ngContentEditable.factory('editable.rangeHelperService', [function () {
             var sel;
             if (window.getSelection) {
                 sel = window.getSelection();
-                if (sel.rangeCount) {
-                    return sel.getRangeAt(0);
-                }
+                if (sel.rangeCount) return sel.getRangeAt(0);
             } else if (document.selection) {
                 return document.selection.createRange();
             }
@@ -375,6 +375,12 @@ ngContentEditable.factory('editable.rangeHelperService', [function () {
         getSelectionNode: function () {
            var node = document.getSelection().anchorNode;
            return ((node && node.nodeType == 3) ? node.parentNode : node);
+        },
+        getEditableComponents: function () {
+            var range = this.getSelectionRange(),
+                contents = (range) ? range.cloneContents() : null,
+                nodes = (contents) ? contents.querySelectorAll('.editable-component') : null;
+            return (nodes && nodes.length) ? nodes : null;
         }
     };
 
