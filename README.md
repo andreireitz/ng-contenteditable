@@ -15,6 +15,8 @@ The available demo requires jQuery and Bootstrap 3 (because I just wanted to put
 
 [Reference](https://github.com/cathalsurfs/ng-contenteditable/blob/master/demo/js/app.js) (see code comments)
 
+[Tests](https://github.com/cathalsurfs/ng-contenteditable/tree/master/test) (see notes below)
+
 ##Requirements##
 
 ###Firefox###
