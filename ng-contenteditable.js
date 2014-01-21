@@ -147,11 +147,28 @@ ngContentEditable.directive('editable', ['$compile', 'editable.dragHelperService
                     //utils.restoreElementStyle(element, _cachedComputedStyle);
                 })
                 .bind('drop', function (event) {
+                    
                     event.preventDefault();
+
+                    component = drag.getDragElement();
+
+                    if (component) {
+                        event.preventDefault();
+                        var $component = $(component);
+                        var r = range.captureRange(event);
+                        $component.detach();
+                        var n = document.createElement('span');
+                        range.insertNode(n);
+                        $(n).replaceWith($component);
+                        _updateScope();
+                        return false;
+                    }
+
                     return _processData(event, function (data) { // Callback after drag data is processed (e.g. file upload).
                         utils.triggerErrorHandler(data, scope);
                         return false;
                     });
+
                 })
                 .bind('paste', function (event) {
                     return _processData(event, function (data) { // Callback after drag data is processed (e.g. file upload).
@@ -173,15 +190,13 @@ ngContentEditable.directive('editableComponent', ['editable.dragHelperService', 
         scope: true,
         link: function (scope, element, attrs) {
             ((element)
-                //.attr('draggable', true)
                 .attr('contenteditable', false)
                 .bind('dragstart', function (event) {
-                    var s = document.getSelection(),
-                        range = document.createRange(),
-                        node = element[0];
-                    s.removeAllRanges();
-                    range.selectNode(node);
-                    s.addRange(range);
+                    if (scope.$isNgContentEditable) {
+                        drag.setDragElement(element);
+                        return true;
+                    }
+                    event.dataTransfer.setData('text/html', element[0].outerHTML);
                     return true;
                 })
             );
@@ -243,9 +258,18 @@ ngContentEditable.factory('editable.configService', function () {
 
 ngContentEditable.factory('editable.dragHelperService', ['$q', 'editable.utilityService', 'editable.configService', function ($q, utils, config) {
 
-    var _registeredDropTypes = {};
+    var _registeredDropTypes = {},
+        _dragElement = null;
 
     return {
+        setDragElement: function (element) {
+            _dragElement = element;
+        },
+        getDragElement: function (element, reset) {
+            var _returnElement = _dragElement;
+            if (reset !== false) _dragElement = null;
+            return _returnElement;
+        },
         processFile: function (file) {
             var deferred = $q.defer(),
                 file = file,

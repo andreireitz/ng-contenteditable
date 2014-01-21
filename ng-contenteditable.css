@@ -38,7 +38,8 @@
     user-select: text;
 }
 
-.editable-button, .editable-control, .editable-control:focus, .editable-control:active {
+.editable-control, .editable-control:focus, .editable-control:active,
+.editable-component, .editable-component:focus, .editable-component:active {
     -moz-user-select: none;
     -khtml-user-select: none;
     -webkit-user-select: none;
@@ -63,25 +64,4 @@
     -ms-user-select: none;
     user-select: none;
     cursor: move;
-}
-
-/* Testing... */
-
-.component-red {
-    background: red;
-    width: 40px;
-    height: 40px;
-    margin: 10px;
-}
-
-.component-green {
-    background: green;
-    width: 40px;
-    height: 40px;
-    margin: 10px;
-}
-
-.component-img {
-    width: 700px;
-    height: 400px;
 }

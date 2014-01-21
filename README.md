@@ -45,6 +45,9 @@ __$isNgContentEditable__ (boolean)
 
 You can access this property to determine if your directive is effectively in "editable mode". In this case, you can define logic for specific behaviors.
 
+##editabel-component##
+
+Directive declaration style is by class, by adding the "editable-component" class name to any elements / directives for which you want to __preserve__ scope. Note - preservation of scope is not entirely reliable. For example, where the user selects and moves a range which encompasses the target element / directive.
 
 ##editable-control##
 
