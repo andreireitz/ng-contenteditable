@@ -36,7 +36,7 @@ ngContentEditable.directive('editable', ['$compile', 'editable.dragHelperService
 
             var _updateScope = function (opts) {
                 var opts = opts || {},
-                    wait = opts.pause || false,
+                    wait = opts.wait || false,
                     updateFn = function () {
                         scope.$apply(_getViewContent);
                     };
@@ -86,11 +86,12 @@ ngContentEditable.directive('editable', ['$compile', 'editable.dragHelperService
                         handler = drag.getDropHandlerObject(file.type);
                     if (!handler) return callback({ error: config.ERRORS.HANDLER_NOT_DEFINED, data: file.type, types: types });
                     var node = _insertNode(handler.node, event); // Insert node prior to data upload.
+                    _updateScope();
                     if (handler) {
                         drag.processFile(file).then(function (data) {
                             drag.triggerFormatHandler(handler, data); // NOTE: Invoke custom handler (usually defined in your custom directive definition body).
                             if (typeof (callback) === 'function') callback({ error: false, data: filesData, types: types });
-                            _updateScope({ wait: true }); // Wait a bit in case scope is already updating.
+                            //_updateScope({ wait: true }); // Wait a bit in case scope is already updating.
                         });
                     }
                     return false; // Prevent default browser behavior for files.
@@ -193,6 +194,9 @@ ngContentEditable.directive('editableComponent', ['editable.dragHelperService', 
         link: function (scope, element, attrs) {
             ((element)
                 .attr('contenteditable', false)
+                .bind('mouseover', function () {
+                    if (scope.$isNgContentEditable) console.log('EDITABLE', element)
+                })
                 .bind('dragstart', function (event) {
                     if (scope.$isNgContentEditable) {
                         drag.setDragElement(element);
@@ -311,7 +315,11 @@ ngContentEditable.factory('editable.dragHelperService', ['$q', 'editable.utility
             handler.node.addClass(config.DRAG_MOVE_CLASS);
         },
         getDropHandlerObject: function (type) {
-            return _registeredDropTypes[type];
+            var handler = _registeredDropTypes[type];
+            return {
+                node: angular.element(handler.node[0].cloneNode()),
+                format: handler.format
+            };
         }
     };
 
