@@ -40,7 +40,7 @@ ngContentEditable.directive('editable', ['$compile', 'editable.dragHelperService
                     updateFn = function () {
                         scope.$apply(_getViewContent);
                     };
-                if (wait) setTimeout(function () { updateFn(); }, config.SCOPE_UPDATE_TIMEOUT || 100); // Allows the scope to sync.
+                if (wait) setTimeout(function () { updateFn(); }, config.SCOPE_UPDATE_TIMEOUT || 100);
                 else updateFn();
             };
 
@@ -90,7 +90,7 @@ ngContentEditable.directive('editable', ['$compile', 'editable.dragHelperService
                         drag.processFile(file).then(function (data) {
                             drag.triggerFormatHandler(handler, data); // NOTE: Invoke custom handler (usually defined in your custom directive definition body).
                             if (typeof (callback) === 'function') callback({ error: false, data: filesData, types: types });
-                            _updateScope();
+                            _updateScope({ wait: true }); // Wait a bit in case scope is already updating.
                         });
                     }
                     return false; // Prevent default browser behavior for files.
