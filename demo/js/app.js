@@ -1,6 +1,6 @@
 var EditorApp = angular.module('EditorApp', ['EditorDirectives']);
 
-EditorApp.factory('EditorStorage', function () {
+EditorApp.factory('EditorStorage', ['editable.configService', function (config) {
 
     /* NOTE:
      *
@@ -13,7 +13,7 @@ EditorApp.factory('EditorStorage', function () {
      *
      */ 
     
-    var STORAGE_ID = 'NG_CONTENTEDITABLE_STORAGE';
+    var STORAGE_ID = 'NG_CONTENTEDITABLE_STORAGE_' + config.VERSION || 0;
 
     return {
         get: function () {
@@ -44,7 +44,7 @@ EditorApp.factory('EditorStorage', function () {
         }
     };
 
-});
+}]);
 
 EditorApp.controller('EditorCtrl', ['$scope', 'EditorStorage', 'editable.configService', function ($scope, EditorStorage, config) {
 

@@ -248,6 +248,7 @@ ngContentEditable.factory('editable.utilityService', ['editable.configService', 
 
 ngContentEditable.factory('editable.configService', function () {
     return {
+        VERSION: '0.1.7',
         DRAG_MOVE_CLASS: 'editable-dropped',
         DRAG_COMPONENT_CLASS: 'editable-component',
         SCOPE_UPDATE_TIMEOUT: 10,
