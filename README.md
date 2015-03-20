@@ -1,4 +1,4 @@
-![ngContentEditable](http://inchsurf.com/ng-contenteditable/demo/img/logo.png)
+![ngContentEditable](https://raw.githubusercontent.com/cathalsurfs/ng-contenteditable/master/demo/img/logo.png)
 
 =====================
 ##ngContentEditable##
